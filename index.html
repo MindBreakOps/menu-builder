@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2C211D">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mind Break | Pro Menu Builder</title>
+    <title>Mind Break | Ultimate Menu Builder</title>
     
     <link id="pwa-manifest" rel="manifest" href="">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/MindBreakOps/MBO-HumanResourceSystem/main/mind.png">
@@ -18,7 +18,7 @@
         body { margin: 0; display: flex; height: 100vh; overflow: hidden; transition: background-color 0.4s ease; font-family: 'Montserrat', sans-serif;}
         * { box-sizing: border-box; }
 
-        /* --- Mobile Navigation (Hidden on Desktop) --- */
+        /* --- Mobile Navigation --- */
         .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #2C211D; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
         .mobile-nav button { flex: 1; background: none; border: none; color: #D2C4B4; padding: 15px 0; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9em; cursor: pointer; border-top: 3px solid transparent; transition: 0.2s;}
         .mobile-nav button.active { color: #FFF; border-top: 3px solid #A67C52; background: rgba(255,255,255,0.05); }
@@ -29,20 +29,14 @@
             overflow-y: auto; box-shadow: 2px 0 15px rgba(0,0,0,0.4); z-index: 10;
             flex-shrink: 0; height: 100%;
         }
-
         .builder-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.5em; border-bottom: 1px solid #6D5E54; padding-bottom: 10px; margin-top: 0; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 0.85em; margin-bottom: 5px; color: #D2C4B4; }
-        .form-group input, .form-group select, .form-group textarea { 
-            width: 100%; padding: 10px; border: 1px solid #6D5E54; background-color: #1A1412; 
-            color: #fff; border-radius: 4px; font-family: 'Montserrat', sans-serif; 
-        }
-        
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #6D5E54; background-color: #1A1412; color: #fff; border-radius: 4px; font-family: 'Montserrat', sans-serif; }
         .inline-group { display: flex; gap: 10px; }
         .inline-group input { flex: 1; }
         .btn-auto { background-color: #D2C4B4; color: #2C211D; border: none; padding: 0 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.2s;}
         .btn-auto:hover { background-color: #F7F3EE; }
-
         .btn { width: 100%; padding: 12px; background-color: #A67C52; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px; transition: 0.2s; }
         .btn:hover { background-color: #8C7A6B; }
         .btn-print { background-color: #4CAF50; margin-top: 30px; }
@@ -53,33 +47,23 @@
             flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; 
             align-items: center; transition: background-color 0.4s ease; height: 100%;
         }
-
-        .menu-container {
-            max-width: 900px; width: 100%; padding: 50px; position: relative; 
-            transition: all 0.4s ease;
-        }
-
-        /* --- Structure & Grids --- */
+        .menu-container { max-width: 900px; width: 100%; padding: 50px; position: relative; transition: all 0.4s ease; box-sizing: border-box;}
         .menu-section { margin-bottom: 40px; }
         .section-title-wrapper { text-align: center; margin-bottom: 20px; width: 100%; }
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 50px; }
         .logo-container { text-align: center; margin-bottom: 25px; }
 
-        /* --- Fixed Delete Button --- */
+        /* --- Items & Smart Delete --- */
         .menu-item { position: relative; display: flex; gap: 15px; align-items: center; page-break-inside: avoid; border: 1px solid transparent; padding: 5px; border-radius: 8px;}
         .menu-item:hover { border: 1px dashed rgba(128,128,128,0.3); } 
-        
         .delete-btn { 
-            position: absolute; right: 5px; top: 5px; 
-            background: #e74c3c; color: white; border: none; border-radius: 5px; 
-            width: 30px; height: 30px; cursor: pointer; opacity: 0; font-weight: bold; 
-            z-index: 50; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; right: 5px; top: 5px; background: #e74c3c; color: white; border: none; border-radius: 5px; 
+            width: 30px; height: 30px; cursor: pointer; opacity: 0; font-weight: bold; z-index: 50; transition: all 0.2s; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;
         }
         .menu-item:hover .delete-btn { opacity: 1; } 
         .delete-btn:hover { background: #c0392b; transform: scale(1.1); }
-
-        .item-details { flex: 1; min-width: 0; /* Prevents text overflow breaking grid */ }
+        .item-details { flex: 1; min-width: 0; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; padding-bottom: 4px; }
         .item-name { font-weight: 600; font-size: 1.1em; word-wrap: break-word;}
         .item-price { font-weight: 600; font-size: 1.1em; margin-left: 10px; white-space: nowrap;}
@@ -88,37 +72,26 @@
         [contenteditable="true"]:hover { cursor: text; outline: 1px dashed rgba(128,128,128,0.5); }
         [contenteditable="true"]:focus { outline: 1px solid #A67C52; }
 
-        /* --- SMARTPHONE RESPONSIVE CSS (PWA MODE) --- */
+        /* --- SMARTPHONE PWA RESPONSIVE --- */
         @media (max-width: 800px) {
-            body { display: block; } /* Remove flex layout for absolute mobile positioning */
-            
-            .mobile-nav { display: flex; } /* Show bottom bar */
-            
-            .builder-panel { 
-                width: 100%; height: calc(100vh - 53px); position: absolute; top: 0; left: 0;
-                display: block; padding: 20px; z-index: 50; 
-                transform: translateX(0); transition: transform 0.3s ease;
-            }
-            .builder-panel.hidden-mobile { transform: translateX(-100%); } /* Slide out */
-
-            .preview-area {
-                width: 100%; height: calc(100vh - 53px); padding: 15px; position: absolute; top: 0; left: 0;
-                z-index: 40; transform: translateX(0); transition: transform 0.3s ease;
-            }
-            .preview-area.hidden-mobile { transform: translateX(100%); } /* Slide out */
-
+            body { display: block; }
+            .mobile-nav { display: flex; }
+            .builder-panel { width: 100%; height: calc(100vh - 53px); position: absolute; top: 0; left: 0; display: block; padding: 20px; z-index: 50; transform: translateX(0); transition: transform 0.3s ease; }
+            .builder-panel.hidden-mobile { transform: translateX(-100%); }
+            .preview-area { width: 100%; height: calc(100vh - 53px); padding: 15px; position: absolute; top: 0; left: 0; z-index: 40; transform: translateX(0); transition: transform 0.3s ease; }
+            .preview-area.hidden-mobile { transform: translateX(100%); }
             .menu-container { padding: 20px; }
-            .menu-grid { grid-template-columns: 1fr; gap: 20px; } /* Stack items vertically */
-            
-            .item-image { width: 60px; height: 60px; } /* Smaller images on phone */
-            .delete-btn { opacity: 0.8; /* Always slightly visible on mobile since no hover */ }
-            
-            .btn-print { display: none; } /* Hide print on control panel in mobile, handled by mobile nav */
+            .menu-grid { grid-template-columns: 1fr; gap: 20px; }
+            .item-image { width: 60px; height: 60px; }
+            .delete-btn { opacity: 0.8; }
+            .btn-print { display: none; }
         }
 
         /* =========================================
-           THEME STYLES (Kept identical for beauty)
+           ALL 6 DESIGN THEMES
            ========================================= */
+        
+        /* 1. Desert (Default) */
         body.theme-desert { background-color: #F7F3EE; color: #3B2F2F; }
         body.theme-desert .preview-area { background-color: #F7F3EE; }
         .theme-desert .menu-container { background-color: #FFFFFF; border: 1px solid #D2C4B4; box-shadow: 0 10px 30px rgba(59, 47, 47, 0.08); border-radius: 12px; }
@@ -133,6 +106,23 @@
         .theme-desert .item-image { border: 2px solid #EAE0D5; }
         .theme-desert .logo { width: 110px; filter: sepia(0.2) contrast(1.1); }
 
+        /* 2. Old Texas */
+        body.theme-texas { background-color: #dcb88e; color: #3e2723; font-family: 'Lora', serif; }
+        body.theme-texas .preview-area { background-image: radial-gradient(#cba372 15%, transparent 16%), radial-gradient(#cba372 15%, transparent 16%); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
+        .theme-texas .menu-container { background-color: #fcf5e5; border: 8px double #5d4037; border-radius: 0; }
+        .theme-texas h1, .theme-texas h2 { font-family: 'Rye', cursive; color: #4e342e; text-align: center; margin: 0;}
+        .theme-texas h1 { font-size: 3.5em; border-bottom: 2px dashed #5d4037; padding-bottom: 15px; margin-bottom: 10px; }
+        .theme-texas h2 { font-size: 2em; text-decoration: underline; text-decoration-style: dotted; border: none; }
+        .theme-texas .subtitle { text-align: center; font-style: italic; font-size: 1.2em; color: #5d4037; margin-bottom: 40px; }
+        .theme-texas .item-name { font-weight: bold; font-size: 1.2em; }
+        .theme-texas .item-price { font-weight: bold; font-size: 1.2em; font-family: 'Rye', cursive; }
+        .theme-texas .item-desc { font-size: 0.95em; font-style: italic; color: #5d4037; margin: 0 0 5px 0; }
+        .theme-texas .item-calories { font-size: 0.85em; font-weight: bold; color: #d84315; }
+        .theme-texas .item-header { border-bottom: 1px dotted #8d6e63; }
+        .theme-texas .item-image { border: 3px solid #5d4037; border-radius: 8px; } 
+        .theme-texas .logo { width: 130px; filter: sepia(0.8) contrast(1.2); }
+
+        /* 3. Midnight Gold */
         body.theme-midnight { background-color: #121212; color: #E0E0E0; }
         body.theme-midnight .preview-area { background-color: #0a0a0a; }
         .theme-midnight .menu-container { background-color: #1A1A1A; border: 2px solid #D4AF37; box-shadow: 0 15px 40px rgba(0,0,0,0.8); border-radius: 8px; }
@@ -146,6 +136,54 @@
         .theme-midnight .item-header { border-bottom: 1px solid #333; }
         .theme-midnight .item-image { border: 2px solid #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         .theme-midnight .logo { width: 110px; filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(5deg); }
+
+        /* 4. Minimalist Mono */
+        body.theme-minimal { background-color: #EFEFEF; color: #000; font-family: 'Space Mono', monospace; }
+        body.theme-minimal .preview-area { background-color: #EFEFEF; }
+        .theme-minimal .menu-container { background-color: #FFF; border: 4px solid #000; border-radius: 0; box-shadow: 10px 10px 0 #000; }
+        .theme-minimal h1, .theme-minimal h2 { font-family: 'Space Mono', monospace; color: #000; text-transform: uppercase; text-align: center; margin: 0; }
+        .theme-minimal h1 { font-size: 3em; margin-bottom: 5px; letter-spacing: -2px; }
+        .theme-minimal h2 { font-size: 1.5em; background: #000; color: #FFF; padding: 5px 15px; display: inline-block; }
+        .theme-minimal .subtitle { text-align: center; letter-spacing: 1px; color: #000; font-weight: bold; margin-bottom: 40px; }
+        .theme-minimal .item-name { font-weight: bold; font-size: 1.1em; }
+        .theme-minimal .item-price { font-weight: bold; font-size: 1.1em; background: #000; color: #FFF; padding: 0 5px;}
+        .theme-minimal .item-desc { font-size: 0.85em; color: #555; margin: 0 0 5px 0; }
+        .theme-minimal .item-calories { font-size: 0.75em; font-weight: bold; border: 1px solid #000; padding: 1px 4px; }
+        .theme-minimal .item-header { border-bottom: 2px solid #000; }
+        .theme-minimal .item-image { border: 2px solid #000; border-radius: 0; filter: grayscale(100%) contrast(1.2); }
+        .theme-minimal .logo { width: 100px; filter: grayscale(100%) contrast(200%); }
+
+        /* 5. Neon Cyberpunk */
+        body.theme-neon { background-color: #0b0c10; color: #c5c6c7; font-family: 'Montserrat', sans-serif; }
+        body.theme-neon .preview-area { background-color: #0b0c10; background-image: linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px;}
+        .theme-neon .menu-container { background-color: rgba(11, 12, 16, 0.9); border: 1px solid #66fcf1; box-shadow: 0 0 20px rgba(102, 252, 241, 0.2); border-radius: 4px; }
+        .theme-neon h1, .theme-neon h2 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; text-align: center; font-weight: 800; margin: 0;}
+        .theme-neon h1 { font-size: 3em; margin-bottom: 5px; color: #fff; text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
+        .theme-neon h2 { font-size: 1.5em; color: #66fcf1; text-shadow: 0 0 5px #66fcf1; border-bottom: 1px solid #45a29e; padding-bottom: 10px; display: inline-block;}
+        .theme-neon .subtitle { text-align: center; letter-spacing: 4px; color: #45a29e; margin-bottom: 40px; }
+        .theme-neon .item-name { font-weight: bold; font-size: 1.1em; color: #fff;}
+        .theme-neon .item-price { font-weight: bold; font-size: 1.1em; color: #ff007f; text-shadow: 0 0 5px #ff007f; }
+        .theme-neon .item-desc { font-size: 0.85em; color: #c5c6c7; margin: 0 0 5px 0; }
+        .theme-neon .item-calories { font-size: 0.75em; color: #0b0c10; background: #66fcf1; padding: 2px 6px; border-radius: 2px; font-weight: bold;}
+        .theme-neon .item-header { border-bottom: 1px dashed #45a29e; }
+        .theme-neon .item-image { border: 2px solid #ff007f; filter: contrast(1.2) saturate(1.5); box-shadow: 0 0 10px #ff007f;}
+        .theme-neon .logo { width: 110px; filter: invert(1) drop-shadow(0 0 5px #66fcf1); }
+
+        /* 6. Pastel Sunrise */
+        body.theme-pastel { background-color: #fdf6f5; color: #5e5466; font-family: 'Quicksand', sans-serif; }
+        body.theme-pastel .preview-area { background-color: #fdf6f5; }
+        .theme-pastel .menu-container { background-color: #fff; border: 4px solid #fae3d9; box-shadow: 0 15px 30px rgba(250, 227, 217, 0.5); border-radius: 25px; }
+        .theme-pastel h1, .theme-pastel h2 { font-family: 'Quicksand', sans-serif; color: #ffb6b9; text-align: center; font-weight: 700; margin: 0; }
+        .theme-pastel h1 { font-size: 3em; margin-bottom: 5px; }
+        .theme-pastel h2 { font-size: 1.8em; background: #fae3d9; padding: 5px 20px; border-radius: 20px; display: inline-block; color: #5e5466;}
+        .theme-pastel .subtitle { text-align: center; letter-spacing: 2px; color: #bbded6; text-transform: uppercase; margin-bottom: 40px; font-weight: bold;}
+        .theme-pastel .item-name { font-weight: 700; font-size: 1.1em; color: #5e5466;}
+        .theme-pastel .item-price { font-weight: 700; font-size: 1.1em; color: #ffb6b9; }
+        .theme-pastel .item-desc { font-size: 0.9em; color: #9c92a3; margin: 0 0 5px 0; }
+        .theme-pastel .item-calories { font-size: 0.75em; font-weight: bold; color: #fff; background: #bbded6; padding: 2px 8px; border-radius: 12px; }
+        .theme-pastel .item-header { border-bottom: 2px dotted #fae3d9; }
+        .theme-pastel .item-image { border: 4px solid #fae3d9; }
+        .theme-pastel .logo { width: 110px; filter: hue-rotate(320deg) saturate(0.5); }
 
         /* --- Print Mode --- */
         @media print {
@@ -175,7 +213,11 @@
             <label>🎨 Design Theme</label>
             <select id="theme-selector" onchange="changeTheme()">
                 <option value="theme-desert">Modern Desert (KSA)</option>
+                <option value="theme-texas">Old Texas Saloon</option>
                 <option value="theme-midnight">Midnight Gold (Dark)</option>
+                <option value="theme-minimal">Minimalist Mono</option>
+                <option value="theme-neon">Neon Cyberpunk</option>
+                <option value="theme-pastel">Pastel Sunrise</option>
             </select>
         </div>
         <hr style="border-color: #4e3c36; margin: 20px 0;">
@@ -238,28 +280,18 @@
     </div>
 
     <script>
-        // 1. DYNAMIC PWA ENGINE (Creates Manifest and Service Worker entirely in the browser)
+        // 1. DYNAMIC PWA ENGINE
         function initPWA() {
-            // Generate Manifest dynamically
             const manifestObj = {
-                name: "Mind Break Menu Builder",
-                short_name: "MB Builder",
-                start_url: window.location.href,
-                display: "standalone",
-                background_color: "#F7F3EE",
-                theme_color: "#2C211D",
+                name: "Mind Break Menu Builder", short_name: "MB Builder", start_url: window.location.href, display: "standalone",
+                background_color: "#F7F3EE", theme_color: "#2C211D",
                 icons: [{ src: "https://raw.githubusercontent.com/MindBreakOps/MBO-HumanResourceSystem/main/mind.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }]
             };
             const manifestBlob = new Blob([JSON.stringify(manifestObj)], {type: 'application/json'});
             document.getElementById('pwa-manifest').href = URL.createObjectURL(manifestBlob);
 
-            // Generate Service Worker dynamically to allow installation
             if ('serviceWorker' in navigator) {
-                const swCode = `
-                    self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
-                    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
-                    self.addEventListener('fetch', e => { }); // Dummy fetch for PWA requirement
-                `;
+                const swCode = `self.addEventListener('install', e => e.waitUntil(self.skipWaiting())); self.addEventListener('activate', e => e.waitUntil(self.clients.claim())); self.addEventListener('fetch', e => { });`;
                 const swBlob = new Blob([swCode], {type: 'application/javascript'});
                 navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(err => console.log('SW setup skipped.'));
             }
@@ -273,20 +305,17 @@
             const navPreview = document.getElementById('nav-preview');
 
             if(tab === 'builder') {
-                builder.classList.remove('hidden-mobile');
-                preview.classList.add('hidden-mobile');
-                navBuilder.classList.add('active');
-                navPreview.classList.remove('active');
+                builder.classList.remove('hidden-mobile'); preview.classList.add('hidden-mobile');
+                navBuilder.classList.add('active'); navPreview.classList.remove('active');
             } else {
-                builder.classList.add('hidden-mobile');
-                preview.classList.remove('hidden-mobile');
-                navBuilder.classList.remove('active');
-                navPreview.classList.add('active');
+                builder.classList.add('hidden-mobile'); preview.classList.remove('hidden-mobile');
+                navBuilder.classList.remove('active'); navPreview.classList.add('active');
             }
         }
 
         // 3. BUILDER LOGIC
-        let currentImageBase64 = "https://images.unsplash.com/photo-1514432324607-a10761648eaa?auto=format&fit=crop&w=200&q=80"; 
+        let defaultImage = "https://images.unsplash.com/photo-1514432324607-a10761648eaa?auto=format&fit=crop&w=200&q=80";
+        let currentImageBase64 = defaultImage; 
 
         function changeTheme() {
             document.getElementById('app-body').className = document.getElementById('theme-selector').value;
@@ -299,14 +328,24 @@
         }
 
         function generateCalories() {
-            const text = (document.getElementById('input-name').value + " " + document.getElementById('input-desc').value).toLowerCase();
-            let cals = 150;
-            if (text.includes('spanish') || text.includes('condensed')) cals = Math.floor(Math.random() * 50) + 250;
-            else if (text.includes('cake') || text.includes('tiramisu')) cals = Math.floor(Math.random() * 100) + 350;
-            else if (text.includes('latte') || text.includes('flat white')) cals = Math.floor(Math.random() * 50) + 100;
-            else if (text.includes('espresso') || text.includes('v60')) cals = Math.floor(Math.random() * 10) + 5;
+            const name = document.getElementById('input-name').value.toLowerCase();
+            const desc = document.getElementById('input-desc').value.toLowerCase();
+            const text = name + " " + desc;
             
-            document.getElementById('input-cals').value = cals + ' Cals';
+            if(!name && !desc) return alert("Please enter an Item Name or Description first!");
+
+            let cals = 0;
+            if (text.includes('spanish') || text.includes('condensed') || text.includes('mocha')) { cals = Math.floor(Math.random() * 50) + 250; } 
+            else if (text.includes('cake') || text.includes('tiramisu') || text.includes('tart')) { cals = Math.floor(Math.random() * 100) + 350; } 
+            else if (text.includes('cookie') || text.includes('croissant') || text.includes('muffin')) { cals = Math.floor(Math.random() * 80) + 220; } 
+            else if (text.includes('latte') || text.includes('cappuccino') || text.includes('flat white')) { cals = Math.floor(Math.random() * 50) + 100; } 
+            else if (text.includes('cortado') || text.includes('macchiato')) { cals = Math.floor(Math.random() * 20) + 50; } 
+            else if (text.includes('espresso') || text.includes('v60') || text.includes('chemex') || text.includes('americano') || text.includes('brew')) { cals = Math.floor(Math.random() * 10) + 5; } 
+            else { cals = Math.floor(Math.random() * 100) + 150; }
+
+            const calInput = document.getElementById('input-cals');
+            calInput.value = "Calculating...";
+            setTimeout(() => { calInput.value = cals + ' Cals'; }, 400);
         }
 
         document.getElementById('input-image').addEventListener('change', function(e) {
@@ -317,18 +356,14 @@
             }
         });
 
-        // Smart Delete: Removes the item, and if the category is empty, removes the category!
+        // Smart Delete
         function deleteItem(btnElement) {
             const itemElement = btnElement.parentElement;
             const sectionGrid = itemElement.parentElement;
             const fullSection = sectionGrid.parentElement;
             
-            itemElement.remove(); // Delete Item
-            
-            // Check if section is empty
-            if(sectionGrid.children.length === 0) {
-                fullSection.remove(); // Delete Empty Title Category
-            }
+            itemElement.remove(); 
+            if(sectionGrid.children.length === 0) { fullSection.remove(); }
         }
 
         function addMenuItem(preFillData = null) {
@@ -364,7 +399,6 @@
             itemDiv.className = 'menu-item';
             let calHTML = cals ? `<span class="item-calories" contenteditable="true">${cals}</span>` : '';
 
-            // Notice the deleteItem() function is passed 'this'
             itemDiv.innerHTML = `
                 <button class="delete-btn" onclick="deleteItem(this)" title="Delete Item">✖</button>
                 <img src="${imgData}" class="item-image">
@@ -380,18 +414,21 @@
 
             sectionElem.querySelector('.menu-grid').appendChild(itemDiv);
 
-            if (!preFillData) { // Jump to Preview tab on mobile automatically after adding
+            if (!preFillData) { 
                 if(window.innerWidth <= 800) { switchMobileTab('preview'); }
                 document.getElementById('input-name').value = ''; document.getElementById('input-price').value = '';
                 document.getElementById('input-desc').value = ''; document.getElementById('input-cals').value = '';
+                document.getElementById('input-image').value = ''; // Reset file input UI
+                currentImageBase64 = defaultImage; // Reset image data behind the scenes
             }
         }
 
         // Initialize App
         window.onload = function() {
             initPWA();
-            addMenuItem({ section: "Hot Espresso Bar", name: "Flat White", price: "19.0 SR", desc: "Intense espresso with steamed milk.", cals: "110 Cals", img: "https://images.unsplash.com/photo-1572442388796-11668a67ef84?auto=format&fit=crop&w=200&q=80" });
-            addMenuItem({ section: "Desserts & Bakery", name: "Signature Tiramisu", price: "29.0 SR", desc: "Italian classic.", cals: "420 Cals", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=200&q=80" });
+            addMenuItem({ section: "Hot Espresso Bar", name: "Flat White", price: "19.0 SR", desc: "Intense espresso with steamed milk and micro-foam.", cals: "110 Cals", img: "https://images.unsplash.com/photo-1572442388796-11668a67ef84?auto=format&fit=crop&w=200&q=80" });
+            addMenuItem({ section: "Iced Coffee", name: "Ice Spanish Latte", price: "28.0 SR", desc: "Espresso coffee balanced with steamed milk and sweet condensed milk.", cals: "220 Cals", img: "https://images.unsplash.com/photo-1499961024600-ad094db62da3?auto=format&fit=crop&w=200&q=80" });
+            addMenuItem({ section: "Desserts & Bakery", name: "Signature Tiramisu", price: "29.0 SR", desc: "Italian classic—layers of espresso-soaked biscuits topped with rich cream.", cals: "420 Cals", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=200&q=80" });
         };
     </script>
 
